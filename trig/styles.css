@@ -57,6 +57,7 @@ label {
   left: 0px;
   text-align: right;
   margin-right: 2%;
+  padding-top: 15px;
 }
 
 input {
@@ -96,6 +97,7 @@ button {
   }
   label {
     width: 35%;
+    padding-top: 5px;
   }
   input {
     width: 40%;
