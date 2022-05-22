@@ -91,27 +91,50 @@ function getWindDirection(deg){
     }
 }
 
-function getImage(conditions){
+function getImage(conditions, icon){
+    let imageFile;
+    function checkNighttime () {
+        if(icon.includes('n')){
+            imageFile+='_n';
+        }
+    }
     switch (true) {
         case conditions == 800:
-            return './img/clear.jpg'
+            imageFile = './img/clear';
+            checkNighttime();
+            break;
         case conditions < 300:
-            return './img/storm.jpg';
+            imageFile = './img/storm';
+            break;
         case conditions < 400:
-            return './img/drizzle.jpg';
+            imageFile = './img/drizzle';
+            checkNighttime();
+            break;
         case conditions < 600:
-            return './img/rain.jpg';
+            imageFile = './img/rain';
+            checkNighttime();
+            break;
         case conditions < 700:
-            return './img/snowfall.jpg'
+            imageFile = './img/snowfall'
+            checkNighttime();
+            break;
         case conditions < 770:
-            return './img/mist.jpg'
+            imageFile = './img/mist'
+            checkNighttime();
+            break;
         case conditions < 800:
-            return './img/shelf_cloud.jpg'
+            imageFile = './img/shelf_cloud'
+            checkNighttime();
+            break;
         case conditions < 803:
-            return './img/scattered.jpg'
+            imageFile = './img/scattered';
+            checkNighttime();
+            break;
         case conditions < 805:
-            return './img/overcast.jpg'
+            imageFile = './img/overcast'
+            break;
     }
+    return imageFile+='.jpg';
 }
 
 function getCurrentWeather(lat, lon) {
@@ -131,7 +154,7 @@ function getCurrentWeather(lat, lon) {
         <p>Восход: ${getTime(data.sys.sunrise)}</p>
         <p>Закат: ${getTime(data.sys.sunset)}</p>
         `;
-    document.querySelector('body').style.backgroundImage = `url(${getImage(data.weather[0].id)})`;
+    document.querySelector('body').style.backgroundImage = `url(${getImage(data.weather[0].id, data.weather[0].icon)})`;
     getForecast(lat, lon);
 });
 }
