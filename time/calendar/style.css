@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(126, 55, 120);
+    font-family: Verdana,Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+.month {
+    width: 600px;
+    min-width: 500px;
+    height: 600px;
+    margin: 0 auto;
+    margin-top: 200px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+}
+
+.month {
+    background-color: white;
+    box-shadow: 2px 3px 50px rgba(0, 0, 0, 0.659);
+}
+
+.header {
+    background-color: rgb(189, 47, 99);
+    height: 100px;
+}
+
+.weekdays {
+    color: rgb(189, 47, 99);
+}
+
+.weekdays, .day:hover {
+    font-weight: bold;
+}
+
+.header {
+    grid-column: 1/8;
+}
+
+.day:hover, .header {
+    color: white;
+}
+
+.day {
+    border: 1px solid white;
+}
+
+.day:hover {
+    background-color: rgb(189, 47, 99);
+    transition: background-color .3s;
+}
+
+.header, .day, .weekdays, .differentMonth {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
