@@ -1,3 +1,9 @@
+const today = new Date();
+var currentYear = today.getFullYear();
+var currentMonth = today.getMonth();
+var monthToDisplay = new Date(currentYear,currentMonth,1);
+document.addEventListener('load',makeCalendar(monthToDisplay));
+
 function monthName(number){
     switch (number) {
         case 0:
@@ -39,34 +45,53 @@ function monthName(number){
         break;
     }
 }
-const month = document.querySelector('.month');
-const monthHeader = document.querySelector('.header');
-const today = new Date();
-const tableHead = today.getMonth();
-const firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
-let firstWeekDay = firstDate.getDay();
-if(firstWeekDay == 0) {
-    firstWeekDay = 7;
+
+function stepMonth(n){
+    monthToDisplay.setMonth(monthToDisplay.getMonth()+n);
+    makeCalendar(monthToDisplay);
 }
 
-//get first monday date for calendar
-let daysOffset = (-1)*(firstWeekDay-2);
-let myDate = new Date(today.getFullYear(), today.getMonth(), daysOffset);
 
-monthHeader.innerHTML+=monthName(tableHead).toUpperCase();
+function makeCalendar(month){
+    const firstMonthDate = new Date(month.getFullYear(), month.getMonth(), 1);
+    const monthContainer = document.querySelector('.calendar');
+    monthContainer.innerHTML=`
+    <div class="header"></div>
+    <div class="weekdays">ПН</div>
+    <div class="weekdays">ВТ</div>
+    <div class="weekdays">СР</div>
+    <div class="weekdays">ЧТ</div>
+    <div class="weekdays">ПТ</div>
+    <div class="weekdays">СБ</div>
+    <div class="weekdays">ВС</div>`;
+    const monthHeader = document.querySelector('.header');
 
-for (let index = 0; index < 42; index++) {
-    let date = new Date(today.getFullYear(), today.getMonth(), daysOffset);
-    let item = document.createElement('div');
-    item.className = 'day';
-    if (date.getMonth() != today.getMonth()) {
-        item.classList.add('differentMonth');
+    let firstWeekDay = firstMonthDate.getDay();
+    if(firstWeekDay == 0) {
+        firstWeekDay = 7;
     }
-    if ((date.getDate() == today.getDate()) && (date.getMonth() == today.getMonth())){
-        item.classList.add('today')
+
+    //get first monday date for .calendar
+    let daysOffset = (-1)*(firstWeekDay-2);
+
+    monthHeader.innerHTML+=`<div class="step" onclick='stepMonth(-1)'><</div>`;
+    monthHeader.innerHTML+=monthName(month.getMonth()).toUpperCase() + ' ' + month.getFullYear();
+    monthHeader.innerHTML+=`<div class="step" onclick='stepMonth(+1)'>></div>`;
+
+    for (let index = 0; index < 42; index++) {
+        let date = new Date(month.getFullYear(), month.getMonth(), daysOffset);
+        let item = document.createElement('div');
+        item.className = 'day';
+        if (date.getMonth() != month.getMonth()) {
+            item.classList.add('differentMonth');
+        }
+
+        if ((date.getDate() == today.getDate()) && (date.getMonth() == today.getMonth()) && (date.getFullYear() == today.getFullYear())){
+            item.classList.add('today')
+        }
+        item.innerHTML = `<p>${date.getDate()}</p>`;
+        monthContainer.append(item);
+        daysOffset++;
     }
-    item.innerHTML = `<p>${date.getDate()}</p>`;
-    document.querySelector('.month').append(item);
-    daysOffset++;
-}
+    }
 

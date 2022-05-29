@@ -7,21 +7,18 @@
 body {
     background-color: rgb(126, 55, 120);
     font-family: Verdana,Tahoma, sans-serif;
-    font-size: 16px;
+    font-size: 20px;
 }
 
-.month {
-    width: 600px;
-    min-width: 500px;
+.calendar {
+    max-width: 50%;
+    min-width: 400px;
     height: 600px;
     margin: 0 auto;
     margin-top: 200px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(8, 1fr);
-}
-
-.month {
     background-color: white;
     box-shadow: 2px 3px 50px rgba(0, 0, 0, 0.659);
 }
@@ -47,13 +44,10 @@ body {
     color: white;
 }
 
-.day {
-    border: 1px solid white;
-}
-
 .day:hover, .today {
     background-color: rgb(189, 47, 99);
     transition: background-color .4s;
+    color: white;
 }
 
 .header, .day, .weekdays {
@@ -61,6 +55,20 @@ body {
     text-align: center;
     justify-content: center;
     align-items: center;
+}
+
+.header {
+    justify-content:space-between
+}
+
+.step {
+    margin: 0 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.step:hover{
+    cursor: pointer;
 }
 
 .differentMonth {
