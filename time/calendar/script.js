@@ -1,71 +1,72 @@
-const month = document.querySelector('.month');
-const monthHeader = document.querySelector('.header');
-var today = new Date();
-var tableHead = today.getMonth()+1;
-var firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
-var lastDate = new Date(today.getFullYear(), today.getMonth()+1, 0);
-var firstWeekDay = firstDate.getDay();
-if(firstWeekDay == 0) {
-    firstWeekDay = 7;
-}
-
 function monthName(number){
     switch (number) {
-        case 1:
+        case 0:
             return 'Январь'
         break;
-        case 2:
+        case 1:
             return 'Февраль'
         break;
-        case 3:
+        case 2:
             return 'Март'
         break;
-        case 4:
+        case 3:
             return 'Апрель'
         break;
-        case 5:
+        case 4:
             return 'Май'
         break;
-        case 6:
+        case 5:
             return 'Июнь'
         break;
-        case 7:
+        case 6:
             return 'Июль'
         break;
-        case 8:
+        case 7:
             return 'Август'
         break;
-        case 9:
+        case 8:
             return 'Сентябрь'
         break;
-        case 10:
+        case 9:
             return 'Октябрь'
         break;
 
-        case 11:
+        case 10:
             return 'Ноябрь'
         break;
-        case 12:
+        case 11:
         return 'Декабрь'
         break;
     }
 }
+const month = document.querySelector('.month');
+const monthHeader = document.querySelector('.header');
+const today = new Date();
+const tableHead = today.getMonth();
+const firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
+let firstWeekDay = firstDate.getDay();
+if(firstWeekDay == 0) {
+    firstWeekDay = 7;
+}
+
+//get first monday date for calendar
+let daysOffset = (-1)*(firstWeekDay-2);
+let myDate = new Date(today.getFullYear(), today.getMonth(), daysOffset);
 
 monthHeader.innerHTML+=monthName(tableHead).toUpperCase();
 
 for (let index = 0; index < 42; index++) {
-    month.innerHTML+=`<div class="day"></div>`
+    let date = new Date(today.getFullYear(), today.getMonth(), daysOffset);
+    let item = document.createElement('div');
+    item.className = 'day';
+    if (date.getMonth() != today.getMonth()) {
+        item.classList.add('differentMonth');
+    }
+    if ((date.getDate() == today.getDate()) && (date.getMonth() == today.getMonth())){
+        item.classList.add('today')
+    }
+    item.innerHTML = `<p>${date.getDate()}</p>`;
+    document.querySelector('.month').append(item);
+    daysOffset++;
 }
 
-var dayTiles = document.querySelectorAll('.day');
-let dateNumber = 1;
-
-for (let index = 0; index < dayTiles.length; index++) {
-    if((index >= firstWeekDay-1) && (dateNumber <= lastDate.getDate())){
-        dayTiles[index].innerHTML=`<p>${dateNumber}</p>`;
-        dateNumber++;
-    }
-    else {
-        dayTiles[index].className = "differentMonth";
-    }
-}

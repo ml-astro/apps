@@ -43,7 +43,7 @@ body {
     grid-column: 1/8;
 }
 
-.day:hover, .header {
+.day:hover, .header, .today {
     color: white;
 }
 
@@ -51,14 +51,22 @@ body {
     border: 1px solid white;
 }
 
-.day:hover {
+.day:hover, .today {
     background-color: rgb(189, 47, 99);
-    transition: background-color .3s;
+    transition: background-color .4s;
 }
 
-.header, .day, .weekdays, .differentMonth {
+.header, .day, .weekdays {
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
+}
+
+.differentMonth {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.differentMonth:hover {
+    background-color: rgba(189, 47, 99, 0.3);
 }
