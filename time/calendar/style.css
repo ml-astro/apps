@@ -12,7 +12,7 @@ body {
 
 .calendar {
     max-width: 50%;
-    min-width: 400px;
+    min-width: 500px;
     height: 600px;
     margin: 0 auto;
     margin-top: 200px;
@@ -77,4 +77,15 @@ body {
 
 .differentMonth:hover {
     background-color: rgba(189, 47, 99, 0.3);
+}
+
+@media (max-width: 567px){
+    body {
+        font-size: .9em;
+    }
+    .calendar {
+        max-width: 95%;
+        min-width: 360px;
+        height: 500px;
+    }
 }
